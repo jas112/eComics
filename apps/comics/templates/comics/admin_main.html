@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static '/comics/css/admin_styles.css' %}"media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <ul>
+            <li>Dashboard</li>
+            <li><a class="header_link" href = 'dashboard/orders'>Orders</a></li>
+            <li><a class="header_link" href = 'dashboard/products'>Products</a></li>
+            <li><a class="header_link" href = '/dashboard/users'>Users</a></li>
+            <li id="logoff"><a class="header_link" href = 'admin_logout'>Log Off</a></li>
+        </ul>
+        <h1>Hello {{admin.first_name}}</h1>
+    </body>
+</html>

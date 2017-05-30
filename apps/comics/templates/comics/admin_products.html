@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static '/comics/css/admin_styles.css' %}"media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <ul>
+            <li>Dashboard</li>
+            <li><a class="header_link" href = '/dashboard/orders'>Orders</a></li>
+            <li><a class="header_link" href = '/dashboard/products'>Products</a></li>
+            <li><a class="header_link" href = '/dashboard/users'>Users</a></li>
+            <li id="logoff"><a class="header_link" href = 'admin_logout'>Log Off</a></li>
+        </ul>
+        <h1>Products</h1>
+        {% if messages %}
+            {% for message in messages %}
+                <h2>{{ message }}</h2>
+            {% endfor %}
+        {% endif %}
+        <form action="admin_prod_search" method="POST">
+            {% csrf_token %}
+            <input type="text" name="prod_search" value="Search by Name">
+            <input type="submit" value="Search">
+        </form>
+        <button id="myBtn">Add new product</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Add Product</h3>
+            <form action="product_adder" method="POST" enctype='multipart/form-data'>
+                {% csrf_token %}
+                <p class="addtext">Name <input type="text" name="p_name"></p>
+                <p class="addtext">Description </p>
+                <p class="addtext"><textarea name="p_description"></textarea>
+                {% if categories %}
+                    <p>Category<select name="p_category">
+                        {% for category in categories %}
+                            <option value="{{category.name}}">{{category.name}}</option>
+                        {% endfor %}
+                </select></p>
+                <h4>or</h4>
+                {% endif %}
+                <p class="addtext">New Category<input type="text" name="new_p_category"></p>
+                <p class="addtext">Price <input type="number" name="p_price"></p>
+                <p class="addtext">Quantity <input type="number" name="p_quantity"></p>
+                <p>Image Upload<input type="file" name="image"/></p>
+                <input type="submit" value="Add Product">
+            </form>
+          </div>
+
+        </div>
+
+        <script>
+        var modal = document.getElementById('myModal');
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
+
+
+        <table id="products_table">
+            <th>Picture</th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Inventory Count</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Action</th>
+            {% for product in products %}
+            <tr>
+                <td><img src="{{product.image.url}}" style="height:150px;width:100px;"></td>
+                <td>{{product.id}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.quantity}}</td>
+                <td>{{product.category.name}}</td>
+                <td>{{product.price}}
+                <td><a href='product_edit/{{product.id}}'>edit</a> <a href='product_delete/{{product.id}}'>delete</a></td>
+            </tr>
+            {% endfor %}
+            </table>
+            <div class="pagination">
+                <span class="step-links">
+                    {% if products.has_previous %}
+                        <a href="?page={{ products.previous_page_number }}">previous</a>
+                    {% endif %}
+
+                    <span class="current">
+                        Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                    </span>
+
+                    {% if products.has_next %}
+                        <a href="?page={{ products.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+    </body>
+</html>

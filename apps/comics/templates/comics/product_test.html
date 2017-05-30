@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
+    <meta charset='utf-8'>
+  </head>
+  <body>
+    <h1>Hello World</h1>
+    {% for product in products %}
+      <p>{{product.id}}</p>
+      <p>{{product.name}}</p>
+      <p>{{product.price}}</p>
+      <p>{{product.quantity}}</p>
+    {% endfor %}
+      Order ID: <p>{{order.id}}</p>
+      Shipper First Name: <p>{{order.s_fname}}</p>
+      Shipper Last Name: <p>{{order.s_lname}}</p>
+      Order Total: <p>{{order.total}}</p>
+      <p>Products:</p>
+      {% for order_product in order_products %}
+        Product Name:<p>{{order_product.name}}</p>
+        Product Price:<p>{{order_product.price}}</p>
+        Product Name:<p>{{order_product.name}}</p>
+        Product Name:<p>{{order_product.name}}</p>
+      {% endfor %}
+  </body>
+</html>

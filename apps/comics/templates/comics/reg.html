@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html style="height:100%;">
+  <head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{%static 'comics/css/style.css'%}">
+  </head>
+  <body style="height:100%;">
+    <div id="register-con">
+    <form action="/user_register" method="post">
+    {% csrf_token %}
+    <h3 id="shipping_information" style="font-size:30px;">Register</h3>
+    <input type="text" name="u_fname" value="" placeholder="First Name">
+    <input type="text" name="u_lname" value="" placeholder="Last Name">
+    <input type="text" name="u_email" value="" placeholder="Email Address">
+    <input type="text" name="u_pw" value="" placeholder="Password">
+    <input type="text" name="u_confirm_pw" value="" placeholder="Confirm Password">
+    <h3>Ultra Safe Billing Information Saver (we won't sell your data)</h3>
+    <input type="text" name="u_addr_street" value="" placeholder="Address">
+    <input type="text" name="u_street_two" value="" placeholder="Address2">
+    <input type="text" name="u_addr_city" value="" placeholder="City">
+    <!--<input type="text" name="u_addr_state" value="" placeholder="State">-->
+    <select name="u_addr_state">
+        <option>AL</option>
+        <option>AK</option>
+        <option>AZ</option>
+        <option>AR</option>
+        <option>CA</option>
+        <option>CO</option>
+        <option>CT</option>
+        <option>DE</option>
+        <option>FL</option>
+        <option>GA</option>
+        <option>HI</option>
+        <option>ID</option>
+        <option>IL</option>
+        <option>IN</option>
+        <option>IA</option>
+        <option>KS</option>
+        <option>KY</option>
+        <option>LA</option>
+        <option>ME</option>
+        <option>MD</option>
+        <option>MA</option>
+        <option>MI</option>
+        <option>MN</option>
+        <option>MS</option>
+        <option>MO</option>
+        <option>MT</option>
+        <option>NE</option>
+        <option>NV</option>
+        <option>NH</option>
+        <option>NJ</option>
+        <option>NM</option>
+        <option>NY</option>
+        <option>NC</option>
+        <option>ND</option>
+        <option>OH</option>
+        <option>OK</option>
+        <option>OR</option>
+        <option>PA</option>
+        <option>RI</option>
+        <option>SC</option>
+        <option>SD</option>
+        <option>TN</option>
+        <option>TX</option>
+        <option>UT</option>
+        <option>VT</option>
+        <option>VA</option>
+        <option>WA</option>
+        <option>WV</option>
+        <option>WI</option>
+        <option>WY</option>
+      </select>
+      <input type="number" name="u_addr_zip" placeholder="Zip Code">
+      <input type="submit" value="Register">
+    </form>
+    </div>
+  </body>
+</html>

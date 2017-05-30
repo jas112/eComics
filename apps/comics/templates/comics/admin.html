@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div id="adminlog">
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            <h3>Admin Login Page</h3>
+            <form action="dashboard" method="POST">
+                {% csrf_token %}
+                <p>email:<input type="text" name="email"></p>
+                <p>Password:<input type="password" name="password"></p>
+                <input type="submit" value="Login">
+            </form>
+        </div>
+    </body>
+</html>

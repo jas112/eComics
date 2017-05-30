@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Products Main Page</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static '/comics/css/style.css' %}"media="screen" title="no title"  charset="utf-8">
+    <script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+    <!-- <script>
+      $(document).ready(function(){
+        $("#temp_logo").click(function(){
+          $("#temp_logo").fadeOut("slow");
+          $("#door_1_1").animate({width: 'toggle'});
+          $("#door_1_2").animate({width: '-500px'});
+          $("#door_2_1").animate({width: '500px'});
+          $("#door_3_1").animate({width: '-500px'});
+          $("#door_3_2").animate({width: '500px'});
+        });
+      });
+    </script> -->
+  </head>
+  <body id="bg" style="background-image: url('{% static '/comics/images/backgrounds/temp_blue_background_2_web.png' %}')";>
+    {% include 'includes/nav.html'%}
+    <div id="wrapper">
+<!-- __Search Form -->
+      <div id="categories_console_1">
+        {% csrf_token %}
+        <form id="category_search" action="/search_category" method="post">
+          <input type="text" name="" value="" placeholder="Enter Product Here">
+          <button type="search" name="Search">Search</button>
+        </form>
+        <h2 id="category_list_title">Categories</h2>
+        <ul id="categories">
+
+          {%for category in categories%}
+            <li><a href='/product/category/{{category.id}}'>{{category.name}} ( {{category.products.count}} )</a></li>
+          {%endfor%}
+          <!-- <li>Comics {{ comics_inventory }}</li>
+          <li>Graphic Novels {{ graphic_novels_inventory }}</li>
+          <li>Tabletop Games {{ tabletop_inventory }}</li>
+          <li>Miniatures {{ miniatures_inventory }}</li> -->
+        </ul>
+        <a id="show_all_products_link" href="#">Show All</a>
+      </div>
+      <div id="category_console_2">
+        <!-- <h1>Products {{ page_number }}</h1>
+        <div id="products_gallery_navigation">
+          <a class="products_gallery_navigation_links" href="#">first</a>
+          <p class="link_divider">|</p>
+          <a class="products_gallery_navigation_links" href="#">prev</a>
+          <p class="link_divider">|</p>
+          <p id="page_number_sig">Page Number:#{{ page_number }}</p>
+          <p class="link_divider">|</p>
+          <a class="products_gallery_navigation_links" href="#">next</a>
+        </div> -->
+        <form id="category_navigation" action="#" method="post">
+          {% csrf_token %}
+          Comics Sorted by: <select id="category_selection_drop_down">
+            <option value="">Price</option>
+            <option value="">Most Popular</option>
+          </select>
+        </form>
+
+<!-- __Product Display -->
+
+        <div id="category_gallery">
+          <a href="/product_spotlight/{{category.id}}">
+            <div class="category_gallery_item">
+              <div class="product_image_holder">
+                  <img class="product-image" src="{%static 'comics/images/guardians1.jpg'%}" alt="{{product.name}} comic picture">
+              </div>
+              <p class="product_price">Price{{product.price}}</p>
+              <p class="product_name">Name{{product.name}}</p>
+            </div>
+          </a>
+        </div>
+
+<!-- ___Pagination -->
+
+      <div class="pagination">
+        <span class="step-links">
+            {% if products.has_previous %}
+                <a href="?page={{ products.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+            </span>
+
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+      </div>
+
+<!-- __Vault Door -->
+
+      <div id="store_entry">
+        <img id="temp_logo" src="{% static 'comics/images/logo_stuff/temp_title_image_2_web.png' %}" alt="Store Temp Logo">
+        <div id="door_entry_1">
+          <div id="door_1_1">
+            <img id="temp_door_1_1" src="{% static 'comics/images/doors/Project_landing_page_L1_panel_1_cc_web.png' %}" alt="Store Temp Door 1 prt 1">
+          </div>
+          <div id="door_1_2">
+            <img id="temp_door_1_2" src="{% static 'comics/images/doors/Project_landing_page_L1_panel_2_cc_web.png' %}" alt="Store Temp Door 1 prt 2">
+          </div>
+        </div>
+        <div id="door_entry_2">
+          <div id="door_2_1">
+            <img id="temp_door_2_1" src="{% static 'comics/images/doors/Project_landing_page_L2_panel_1_cc_web.png' %}" alt="Store Temp Door 2 prt 1">
+          </div>
+        </div>
+        <div id="door_entry_3">
+          <div id="door_3_1">
+            <img id="temp_door_3_1" src="{% static 'comics/images/doors/Project_landing_page_L3_panel_1_cc_web.png' %}" alt="Store Temp Door 2 prt 2">
+          </div>
+          <div id="door_3_2">
+            <img id="temp_door_3_2" src="{% static 'comics/images/doors/Project_landing_page_L3_panel_2_cc_web.png' %}" alt="Store Temp Door 2 prt 3">
+          </div>
+        </div>
+      </div>
+    </div>
+    {% include 'includes/footer.html' %}
+  </body>
+</html>

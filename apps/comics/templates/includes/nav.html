@@ -1,0 +1,41 @@
+<script src="https://code.jquery.com/jquery-2.1.3.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#my_cart").hide();
+    $("#shopping_cart_nav").click(function(){
+      $("#my_cart").slideToggle("slow");
+    });
+  });
+      </script>
+{% load staticfiles %}
+<div id='nav'  class="container-fluid">
+  <!-- <h1>DojoComics</h1> -->
+  <a href="/products_main"><img id="index_link" src="{% static 'comics/images/logo_stuff/banner_temp_title_text_image.png' %}" alt="Temp Title"></a>
+  <a id="shopping_cart_nav" >Shopping Cart ( {{request.session.cart|length}} )</a>
+  <div id="cart_view">
+    <!-- <div id="display_cart_button">
+      Click to Toggle View Cart<img id="my_cart_img" src="{% static 'comics/images/navigation/shopping_cart.png' %}" alt="Shopping Cart Image">
+    </div> -->
+    <div id="my_cart">
+      <table id="my_cart_display">
+        <thead>
+          <th>Item</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total</th>
+        </thead>
+        {% for item in shopping_cart_items %}
+          <tr>
+            <td>Product Name{{ product.name }}</td>
+            <td>Product Price{{ product.price }}</td>
+            <td>Quantity{{ product.quantity }}</td>
+            <td>Cost{{ total_cost }}</td>
+          </tr>
+          {% endfor %}
+      </table>
+      <div id="shopping_cart_link">
+      <a href="/shopping_cart"><p id="check_out_click">Click for Checkout</p></a>
+      </div>
+    </div>
+  </div>
+</div>

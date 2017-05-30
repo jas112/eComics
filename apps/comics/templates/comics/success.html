@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pay Now</title>
+    {%load staticfiles%}
+    <link rel="stylesheet" type="text/css" href="{%static 'comics/css/style.css'%}">
+    <style>
+      html,body{
+        height:100%;
+        position:relative;
+      }
+    </style>
+  </head>
+  <body>
+    {%if messages%}
+      {%for message in messages%}
+        <p class='{{message.tags}}'>{{message}}</p>
+      {%endfor%}
+    {%endif%}
+    <div class="card_page" style="background:url(/static/comics/images/slideshow_images/slideshow_marvel_2.jpg);background-size:cover;">
+      <div class="inner">
+        <h2>Your order has been received.</h2>
+      </div>
+    </div>
+
+  </body>
+</html>

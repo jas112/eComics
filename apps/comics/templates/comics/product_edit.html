@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static '/comics/css/admin_styles.css' %}"media="screen" title="no title"  charset="utf-8">
+    </head>
+    <body>
+        <ul>
+            <li>Dashboard</li>
+            <li><a class="header_link" href = '/dashboard/orders'>Orders</a></li>
+            <li><a class="header_link" href = '/dashboard/products'>Products</a></li>
+            <li><a class="header_link" href = '/dashboard/users'>Users</a></li>
+            <li id="logoff"><a class="header_link" href = 'admin_logout'>Log Off</a></li>
+        </ul>
+        <h1>Product Edit</h2>
+        <img src="{{product.image.url}}" style="height:300px;width:200px;">
+        <form action="product_update/{{product.id}}" method="POST">
+            {% csrf_token %}
+            <h3>Name:<input type="text" name="edit_name" value="{{product.name}}"></h3>
+            <h3>Description:<textarea name="edit_description">{{product.description}}</textarea></h3>
+            {% if categories %}
+                <p>Category<select name="edit_category">
+                    <option value={{product.category.name}}>{{product.category.name}}</option>
+                    {% for category in categories %}
+                        {% if category.name != product.category.name %}
+                            <option value="{{category.name}}">{{category.name}}</option>
+                        {% endif %}
+                    {% endfor %}
+            </select></p>
+            <h4>or</h4>
+            {% endif %}
+            <p class="addtext">New Category<input type="text" name="new_edit_category"></p>
+            <p class="addtext">Price <input type="number" step="0.01" name="edit_price" value="{{product.price}}"></p>
+            <p class="addtext">Quantity <input type="number" name="edit_quantity" value="{{product.quantity}}"></p>
+            <input type="submit" value="Update">
+        </form>
+</html>
+
+<!-- <p class="addtext">Name <input type="text" name="p_name"></p>
+<p class="addtext">Description </p>
+<p class="addtext"><textarea name="p_description"></textarea>
+{% if categories %}
+    <p>Category<select name="p_category">
+        {% for category in categories %}
+            <option value="{{category.name}}">{{category.name}}</option>
+        {% endfor %}
+</select></p>
+<h4>or</h4>
+{% endif %}
+<p class="addtext">New Category<input type="text" name="new_p_category"></p>
+<p class="addtext">Price <input type="number" step="0.01" name="p_price"></p>
+<p class="addtext">Quantity <input type="number" name="p_quantity"></p> -->

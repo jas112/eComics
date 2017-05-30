@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Login | Register</title>
+    <meta charset='utf-8'>
+  </head>
+  <body>
+    <div id='lr_wrapper'>
+    <h1>suh dude. login or "reg" to complete yo mofuggin order</h1>
+    <a href='/products_main'>Home</a>
+    <form action="/user_register" method="post">
+    {% csrf_token %}
+    <h3 id="shipping_information">Register</h3>
+    <p>First Name:</p>
+    <input type="text" name="u_fname" value="" placeholder="First Name">
+    <p>Last Name:</p>
+    <input type="text" name="u_lname" value="" placeholder="Last Name">
+    <p>Email Address:</p>
+    <input type="text" name="u_email" value="" placeholder="Email Address">
+    <p>Password:</p>
+    <input type="text" name="u_pw" value="" placeholder="Password">
+    <p>Confirm Password:</p>
+    <input type="text" name="u_confirm_pw" value="" placeholder="Confirm Password">
+    <h3>Ultra Safe Billing Information Saver (we won't sell your data)</h3>
+    <p>Address:</p>
+    <input type="text" name="u_addr_street" value="" placeholder="Address">
+    <p>Address 2:</p>
+    <input type="text" name="u_street_two" value="" placeholder="Address2">
+    <p>City:</p>
+    <input type="text" name="u_addr_city" value="" placeholder="City">
+    <p>State:</p>
+    <!--<input type="text" name="u_addr_state" value="" placeholder="State">-->
+    <select name="u_addr_state">
+        <option>AL</option>
+        <option>AK</option>
+        <option>AZ</option>
+        <option>AR</option>
+        <option>CA</option>
+        <option>CO</option>
+        <option>CT</option>
+        <option>DE</option>
+        <option>FL</option>
+        <option>GA</option>
+        <option>HI</option>
+        <option>ID</option>
+        <option>IL</option>
+        <option>IN</option>
+        <option>IA</option>
+        <option>KS</option>
+        <option>KY</option>
+        <option>LA</option>
+        <option>ME</option>
+        <option>MD</option>
+        <option>MA</option>
+        <option>MI</option>
+        <option>MN</option>
+        <option>MS</option>
+        <option>MO</option>
+        <option>MT</option>
+        <option>NE</option>
+        <option>NV</option>
+        <option>NH</option>
+        <option>NJ</option>
+        <option>NM</option>
+        <option>NY</option>
+        <option>NC</option>
+        <option>ND</option>
+        <option>OH</option>
+        <option>OK</option>
+        <option>OR</option>
+        <option>PA</option>
+        <option>RI</option>
+        <option>SC</option>
+        <option>SD</option>
+        <option>TN</option>
+        <option>TX</option>
+        <option>UT</option>
+        <option>VT</option>
+        <option>VA</option>
+        <option>WA</option>
+        <option>WV</option>
+        <option>WI</option>
+        <option>WY</option>
+      </select>
+      <p>Zip Code:</p>
+      <input type="number" name="u_addr_zip" placeholder="Zip Code">
+      <input type="submit" value="Register">
+    </form>
+    <form action='/user_login' method='post'>
+      {% csrf_token %}
+      <p>Email Address:</p>
+      <input type="text" name="login_email" placeholder="Email Address">
+      <p>Password:</p>
+      <input type="text" name="login_pw" placeholder="Password">
+      <input type="submit" value="Login">
+    </form>
+    </div>
+  </body>
+</html>

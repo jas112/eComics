@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        {% load staticfiles %}
+<link rel="stylesheet" href="{% static '/comics/css/admin_styles.css' %}"media="screen" title="no title"  charset="utf-8">    </head>
+    <body>
+            <ul>
+                <li>Dashboard</li>
+                <li><a class="header_link" href = '/dashboard/orders'>Orders</a></li>
+                <li><a class="header_link" href = '/dashboard/products'>Products</a></li>
+                <li><a class="header_link" href = '/dashboard/users'>Users</a></li>
+                <li id="logoff"><a class="header_link" href = 'admin_logout'>Log Off</a></li>
+            </ul>
+        <h1>Orders</h1>
+        <table id="products_table">
+            <th>ID</th>
+            <th>User</th>
+            <th>Total</th>
+            <th>Status</th>
+            {% for order in orders %}
+                <tr>
+                    <td>{{order.id}}</td>
+                    <td>{{order.user.first_name}}</td>
+                    <td>{{order.total}}</td>
+                    <td>
+                        <form action="order_update" method="POST">
+                        <select name="new_status">
+                            {% if order.status == 1 %}
+                                <option value={{order.status}}>Processing</option>
+                                <option value="2">Shipped</option>
+                                <option value="3">Completed</option>
+                            {% elif order.status == 2 %}
+                                <option value={{order.status}}>Shipped</option>
+                                <option value="1">Processing</option>
+                                <option value="3">Completed</option>
+                            {% elif order.status == 3 %}
+                                <option value={{order.status}}>Completed</option>
+                                <option value="1">Processing</option>
+                                <option value="2">Shipped</option>
+                            {% endif %}
+                        </select>
+                    </td>
+                    <td><input type="submit" value="Update"></form><a href="order_delete/{{user.id}}"><button>Delete</button></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
